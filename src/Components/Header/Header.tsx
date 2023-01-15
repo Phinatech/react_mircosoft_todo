@@ -31,6 +31,7 @@ display: flex;
 justify-content: center;
 align-items: center;
 color: #4e4ef1;
+
 `
 const Middle = styled.div`
   height: 100%;
