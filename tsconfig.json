@@ -22,5 +22,5 @@
   },
   "include": [
     "src"
-  ]
+, "planned/Planned.tsx", "important/Impotant.tsx", "my day/MyDay.tsx", "Assigned/Assigned.tsx"  ]
 }

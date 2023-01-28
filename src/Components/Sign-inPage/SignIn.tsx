@@ -6,98 +6,101 @@ import { NavLink } from "react-router-dom";
 const SignUpPage = () => {
   return (
     <Container>
-      <Wrapper>
-        <Layer>
-          <Logo>
-            <img src={pics} alt="" />
-          </Logo>
-          <h3>Sign In</h3>
-          <Form>
-            <input placeholder="Email,phone or skype" type="email" />
-          </Form>
-          <Account>
-            No Account? <NavLink to="/"><span>Sign Up</span></NavLink>
-          </Account>
-          <Buttons>
-            <Button bg="grey" col="#000">
-              Back
-            </Button>
-            <Button bg="blue" col="#fff">
-              Next
-            </Button>
-          </Buttons>
-        </Layer>
-      </Wrapper>
+      <Card>
+        <img src={pics} alt="" />
+        <h4>Sign In</h4>
+       
+        <input
+          type="email"
+          placeholder="Enter your email"
+        />
+        <input
+          type="password"
+          placeholder="Enter your password"
+        />
+
+        <Div>
+          Already have an account?
+          <Span>Sign in</Span>
+        </Div>
+
+        <Hold>
+          <button type="submit">Next</button>
+        </Hold>
+        {/* <Box>Please enter the required</Box> */}
+      </Card>
     </Container>
   );
 };
 
 export default SignUpPage;
-const Buttons = styled.div`
+const Box = styled.button`
+  width: 130px;
+  height: 30px;
+  background-color: red;
+  border: 0;
+  position: relative;
+
+  ::after {
+    background-color: red;
+    left: 4%;
+    width: 15px;
+    height: 15px;
+    transform: rotate(45deg);
+  }
+`;
+
+const Div = styled.div`
+  display: flex;
+`;
+
+const Hold = styled.div`
   display: flex;
   justify-content: flex-end;
-`;
-const Button = styled.button<{ bg: string; col: string }>`
-  height: 45px;
-  width: 100px;
-  border: none;
+  margin-top: 20px;
 
-  background-color: ${(props) => props.bg};
-  margin-top: 50px;
+  button {
+    width: 80px;
+    height: 30px;
+    border: 0;
+    background-color: grey;
+    border-radius: 3px;
+  }
+`;
+const Span = styled.div`
   margin-left: 10px;
-  color: ${(props) => props.col};
 `;
-const Account = styled.div`
-  margin-top: 10px;
-
-  span {
-    color: blue;
-  }
-`;
-const Layer = styled.div`
-  height: 300px;
-  width: 400px;
-
-  h3 {
-    color: grey;
-  }
-`;
-const Wrapper = styled.div`
-  height: 400px;
-  width: 500px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+const Card = styled.form`
+  width: 300px;
+  height: 270px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   background-color: white;
-  box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
-`;
-const Form = styled.div`
-  display: flex;
-  flex-direction: column;
-
-  input {
-    border: none;
-    border-bottom: 1px solid grey;
-    margin-top: 20px;
-    padding-bottom: 8px;
-  }
-`;
-const Logo = styled.div`
-  width: 200px;
-  height: 40px;
-  background-color: #ffff;
+  padding: 30px;
 
   img {
-    width: 100%;
-    height: 100%;
+    height: 25px;
+    width: 100px;
     object-fit: cover;
+  }
+  h4 {
+    margin: 0;
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+  input {
+    width: 100%;
+    height: 20px;
+    border: 0;
+    outline: 0;
+    border-bottom: 1px solid grey;
+    margin-bottom: 15px;
   }
 `;
 const Container = styled.div`
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: calc(100vh - 60px);
+  background-color: skyblue;
   display: flex;
-  justify-content: center;
   align-items: center;
-  background-color: #f5f5f5;
+  justify-content: center;
 `;
