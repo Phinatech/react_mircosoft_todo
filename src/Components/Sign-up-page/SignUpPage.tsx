@@ -1,16 +1,17 @@
 import React,{useContext, useState} from 'react'
 import styled from "styled-components"
 import pics from "../images/micrologo.jpg"
-import { NavLink } from 'react-router-dom'
 import axios from "axios"
-import { useNavigate } from 'react-router-dom'
-import { Accessing } from '../Global/Global'
+import { Link, useNavigate } from 'react-router-dom'
+import { GlobalContext } from '../Global/Global'
 
 const SignUpPage = () => {
-const SinginContent = useContext(Accessing)
+
+  // const Global = useContext(GlobalContext)
 
   const [name, setName] = useState("")
   const[email,setEmail] = useState("")
+  const { setcurrentUser, currentUser } = useContext(GlobalContext);
   const[password,setPassword] = useState("")
 
   const navigate = useNavigate()
@@ -24,8 +25,10 @@ const SinginContent = useContext(Accessing)
    })
    .then((res) => {
      console.log(res.data)
-     SinginContent?.setUserData(res.data.data)
-navigate("/SignIn");
+    //  Global.setcurrentUser(res.data.data)
+
+    window.localStorage.setItem("userData", JSON.stringify(res.data.data))
+    navigate("/myday");
     
    })
    .catch((err: any) => {
@@ -34,7 +37,7 @@ navigate("/SignIn");
      
   }
 
- 
+ console.log("this is the current User", currentUser);
   return (
     <Container>
       <Card onSubmit={RegisterUser}>
@@ -44,26 +47,24 @@ navigate("/SignIn");
           required
           value={name}
           onChange={(e) => {
-            setName(e.target.value) 
+            setName(e.target.value);
           }}
           type="text"
           placeholder="Enter name"
-          />
+        />
         <input
           required
           value={email}
           onChange={(e) => {
-          
             setEmail(e.target.value);
           }}
           type="email"
           placeholder="Enter email"
-          />
+        />
         <input
           required
           value={password}
           onChange={(e) => {
-        
             setPassword(e.target.value);
           }}
           type="password"
@@ -72,11 +73,11 @@ navigate("/SignIn");
 
         <Div>
           Already have an account?
-          <Span>Sign in</Span>
+          <Link to="/SignIn">Sign in</Link>
         </Div>
 
         <Hold>
-          <button type="submit">Next</button>
+          <button type="submit">Sign up</button>
         </Hold>
         {/* <Box>Please enter the required</Box> */}
       </Card>
@@ -151,8 +152,8 @@ input{
 `
 const Container = styled.div`
 width: 100%;
-height: calc(100vh - 60px);
-background-color: skyblue;
+height: 100vh;
+background-color: #bad8e4;
 display: flex;
 align-items: center;
 justify-content: center;

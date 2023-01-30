@@ -1,11 +1,13 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components'
 import { BsFillGrid3X3GapFill, } from "react-icons/bs";
 import { AiOutlineSearch, AiOutlineNotification } from "react-icons/ai";
 import { FiSettings } from "react-icons/fi";
 import { BiQuestionMark } from "react-icons/bi";
 
+
 const Header = () => {
+
   return (
     <Container>
       <Wrapper>

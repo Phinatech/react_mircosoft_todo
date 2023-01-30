@@ -1,23 +1,62 @@
-import React,{createContext, PropsWithChildren, useState} from 'react'
 
-interface userData {
-  UserData: null;
-  setUserData: React.Dispatch<React.SetStateAction<null>>;
+import React,{createContext, PropsWithChildren, SetStateAction, useState} from 'react'
+
+interface User{
+  name:"",
+  email:""
+  _id:""
 }
 
-export const Accessing = createContext<userData | null>(null);
+interface ContextData{
+  showDetails:boolean,
+  toggleShow:()=>void,
+  currentUser:User,
+  setcurrentUser:React.Dispatch<React.SetStateAction<User>>
+}
 
-export const Global:React.FC<PropsWithChildren> = ({children}) => {
+export const GlobalContext = createContext<ContextData>({
+  showDetails: false,
+  toggleShow: () => {},
+  currentUser: {
+    name: "",
+    email: "",
+    _id:""
+  },
+  setcurrentUser: (currentUser:{})=>{}
+});
 
-const [UserData, setUserData] = useState(null);
+export const MainContext:React.FC<PropsWithChildren> = ({children}) => {
+  const [showDetails, setShowDetails] = useState(false);
+  const [currentUser, setcurrentUser] = useState<User>({}as User);
+  const toggleShow = ()=>{
+    setShowDetails(!showDetails)
+  };
+
+  React.useEffect(()=>{
+    if(window.localStorage.getItem("userData")){
+      const myData = JSON.parse(window.localStorage.getItem("userData") || "");
+      setcurrentUser(myData);
+    }
+    return;
+    
+  },[]);
 
   return (
-   <Accessing.Provider value={{
-    UserData,
-    setUserData,
-   }}>
-{children}
-   </Accessing.Provider>
-  )
+    <GlobalContext.Provider
+      value={{
+        showDetails,
+        setcurrentUser,
+        currentUser,
+        toggleShow,
+      }}
+    >
+      {children}
+    </GlobalContext.Provider>
+  );
 }
+
+
+
+
+
 

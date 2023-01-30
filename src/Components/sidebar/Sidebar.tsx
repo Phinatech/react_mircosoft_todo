@@ -1,168 +1,208 @@
-import React from 'react'
-import styled from "styled-components"
-import { AiOutlineMenu, AiOutlineStar, AiOutlinePlus } from "react-icons/ai";
-import {
-  BsFillGrid3X3GapFill,
-  BsSun,
-  BsPerson,
-  BsEnvelope,
-} from "react-icons/bs";
- import { ImAttachment } from "react-icons/im";
- import { MdDoneOutline } from "react-icons/md";
-import { RxCalendar } from "react-icons/rx";
-import { NavLink } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import React, { useContext } from "react";
+import styled from "styled-components";
+import { NavLink } from "react-router-dom";
+import { MdOutlineWbSunny } from "react-icons/md";
+import { AiOutlineStar } from "react-icons/ai";
+import { BiCalendar } from "react-icons/bi";
+import { FaRegUser } from "react-icons/fa";
+import { FiHome } from "react-icons/fi";
+import { GlobalContext } from "../Global/Global";
 
-const Sidebar = () => {
-  return (
-    <div>
-      <Side2>
-        <Side>
-          <NavLink to="/home/important">
-            <Plan>
-              <Day>
-                <Icons>
-                  <BsSun />
-                </Icons>
-                <Task>My Day</Task>
-              </Day>
-              <Count>1</Count>
-            </Plan>
-          </NavLink>
+const SideBar = () => {
+	const { setcurrentUser } = useContext(GlobalContext);
+	return (
+		<Cont>
+			<Holder>
+				<Up>Menu</Up>
 
-          <Plan>
-            <Day>
-              <Icons>
-                <AiOutlineStar />
-              </Icons>
-              <Task>Important</Task>
-            </Day>
-            <Count>5</Count>
-          </Plan>
+				<Main>
+					<NavLink
+						to='/myday'
+						style={({ isActive }) => {
+							return {
+								color: isActive ? "black" : "black",
+								textDecoration: isActive ? "none" : " none",
+								background: isActive ? "#e3f7fe" : " none",
+								height: "50px",
 
-          <Plan>
-            <Day>
-              <Icons>
-                <RxCalendar />
-              </Icons>
-              <Task>Planned</Task>
-            </Day>
-            <Count>6</Count>
-          </Plan>
+								borderLeft: isActive ? "4px solid #1DA1F2" : "none",
+								display: isActive ? "flex" : "flex",
+								marginTop: isActive ? "8px" : "8px",
+							};
+						}}>
+						<NavHold>
+							<IconHold>
+								<MdOutlineWbSunny />
+							</IconHold>
+							<Nav>MyDay</Nav>
+						</NavHold>
+					</NavLink>
+				</Main>
 
-          <Plan>
-            <Day>
-              <Icons>
-                <BsPerson />
-              </Icons>
-              <Task> Assigned to me</Task>
-            </Day>
-            <Count>7</Count>
-          </Plan>
+				<Main>
+					<NavLink
+						to='/important'
+						style={({ isActive }) => {
+							return {
+								color: isActive ? "black" : "black",
+								textDecoration: isActive ? "none" : " none",
+								background: isActive ? "#e3f7fe" : " none",
+								height: "50px",
 
-          <Plan>
-            <Day>
-              <Icons>
-                <AiOutlineMenu />
-              </Icons>
-              <Task>Tasks</Task>
-            </Day>
-            <Count>8</Count>
-          </Plan>
+								borderLeft: isActive ? "4px solid #1DA1F2" : "none",
+								display: isActive ? "flex" : "flex",
+								marginTop: isActive ? "8px" : "8px",
+							};
+						}}>
+						<NavHold>
+							<IconHold>
+								<AiOutlineStar />
+							</IconHold>
+							<Nav>Important</Nav>
+						</NavHold>
+					</NavLink>
+				</Main>
 
-          <hr style={{ border: "0.5px solid lightgray", width: "90%" }} />
+				<Main>
+					<NavLink
+						to='/planned'
+						style={({ isActive }) => {
+							return {
+								color: isActive ? "black" : "black",
+								textDecoration: isActive ? "none" : " none",
+								background: isActive ? "#e3f7fe" : " none",
+								height: "50px",
 
-          <Plan style={{ color: "blue" }}>
-            <Day>
-              <Icons>
-                <AiOutlinePlus />
-              </Icons>
-              <Task>Tasks</Task>
-            </Day>
-            <Count>8</Count>
-          </Plan>
-        </Side>
+								borderLeft: isActive ? "4px solid #1DA1F2" : "none",
+								display: isActive ? "flex" : "flex",
+								marginTop: isActive ? "8px" : "8px",
+							};
+						}}>
+						<NavHold>
+							<IconHold>
+								<BiCalendar />
+							</IconHold>
+							<Nav>Planned</Nav>
+						</NavHold>
+					</NavLink>
+				</Main>
 
-        <DownComp>
-          <Icons2>
-            <BsEnvelope />
-          </Icons2>
-          <Icons2>
-            <RxCalendar />
-          </Icons2>
-          <Icons2>
-            <BsPerson />
-          </Icons2>
-          <Icons2>
-            <ImAttachment />
-          </Icons2>
-          <Icons2>
-            <MdDoneOutline />
-          </Icons2>
-        </DownComp>
-      </Side2>
-    </div>
-  );
-}
+				<Main>
+					<NavLink
+						to='/assigned'
+						style={({ isActive }) => {
+							return {
+								color: isActive ? "black" : "black",
+								textDecoration: isActive ? "none" : " none",
+								background: isActive ? "#e3f7fe" : " none",
+								height: "50px",
 
-export default Sidebar
+								borderLeft: isActive ? "4px solid #1DA1F2" : "none",
+								display: isActive ? "flex" : "flex",
+								marginTop: isActive ? "8px" : "8px",
+							};
+						}}>
+						<NavHold>
+							<IconHold>
+								<FaRegUser />
+							</IconHold>
+							<Nav>Assigned to me</Nav>
+						</NavHold>
+					</NavLink>
+				</Main>
+				<Main>
+					<NavLink
+						to='/tasks'
+						style={({ isActive }) => {
+							return {
+								color: isActive ? "black" : "black",
+								textDecoration: isActive ? "none" : " none",
+								background: isActive ? "#e3f7fe" : " none",
+								height: "50px",
 
-const DownComp = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
+								borderLeft: isActive ? "4px solid #1DA1F2" : "none",
+								display: isActive ? "flex" : "flex",
+								marginTop: isActive ? "8px" : "8px",
+							};
+						}}>
+						<NavHold>
+							<IconHold>
+								<FiHome />
+							</IconHold>
+							<Nav>Tasks</Nav>
+						</NavHold>
+					</NavLink>
+				</Main>
+				<Main
+					onClick={() => {
+						window.localStorage.removeItem("userData");
+					}}>
+					<NavLink
+						to='/'
+						style={({ isActive }) => {
+							return {
+								color: isActive ? "black" : "black",
+								textDecoration: isActive ? "none" : " none",
+								background: isActive ? "#e3f7fe" : " none",
+								height: "50px",
 
+								borderLeft: isActive ? "4px solid #1DA1F2" : "none",
+								display: isActive ? "flex" : "flex",
+								marginTop: isActive ? "8px" : "8px",
+							};
+						}}>
+						<NavHold>
+							<IconHold>
+								<FiHome />
+							</IconHold>
+							<Nav>Log Out</Nav>
+						</NavHold>
+					</NavLink>
+				</Main>
+			</Holder>
+		</Cont>
+	);
+};
 
+export default SideBar;
+
+const MainNav = styled(NavLink)`
+	&.active {
+		background-color: red;
+	}
 `;
-const Icons2 = styled.div`
-  width: 50px;
-  height: 30px;
-  /* background-color: red; */
-  color: #5e2d28;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  :hover{
-    background-color: #e7e1e1;
-  }
-`;
-const Icons = styled.div`
-  margin-left: 15px;
-  color: #5e2d28;
-`;
-const Task = styled.div`
-  margin-left: 10px;
-  color: #5e2d28;
-`;
-const Count = styled.div`
-margin-right:15px;
-/* background-color: red; */
-`
-const Day = styled.div`
-  display: flex;
-  margin-top: 10px;
-  margin-bottom: 10px;
-`;
-const Plan = styled.div`
-display: flex;
-align-items: center;
-justify-content: space-between;
-:hover{
-  background-color: lightgrey;
-  cursor: pointer;
-}
 
-`
-const Side = styled.div`
-  width: 250px;
+const Up = styled.div`
+	margin-left: 30px;
 `;
-const Side2 = styled.div`
-  width: 250px;
-  height: 85vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  background-color: #fffdfd;
 
-  /* background-color: red; */
+const Main = styled.div`
+	/* text-decoration: none; */
+	color: black;
+	/* margin-top: 10px; */
+	/* height: 100%; */
+	width: 100%;
+	/* margin-top: 5px; */
 `;
+const NavHold = styled.div`
+	display: flex;
+	margin-left: 30px;
+	display: flex;
+	align-items: center;
+`;
+const IconHold = styled.div`
+	margin-right: 20px;
+	margin-top: 5px;
+`;
+const Nav = styled.div``;
+
+const Holder = styled.div`
+	margin-top: 50px;
+	/* width: 100%; */
+`;
+const Cont = styled.div`
+	height: calc(100vh - 60px);
+	position: fixed;
+	background-color: white;
+	width: 230px;
+	box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;`

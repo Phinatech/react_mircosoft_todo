@@ -1,31 +1,65 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import pics from "../images/micrologo.jpg";
-import { NavLink } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { GlobalContext } from "../Global/Global";
+import axios from "axios";
+import Swal from "sweetalert2";
 
-const SignUpPage = () => {
+const SignInPage = () => {
+  const[email, setEmail] = useState("")
+  const navigate = useNavigate();
+  const {setcurrentUser} = useContext(GlobalContext)
+
+  const LoginUser =async (e:any) => {
+    e.preventDefault();
+    await axios.post("http://localhost:2001/api/login",{
+      email,
+    })
+    .then((res:any)=>{
+      console.log(res);
+      window.localStorage.setItem("userData", JSON.stringify(res.data.data));
+      Swal.fire({
+        icon: "success",
+        title: "Successfully Sign In",
+        // text: res!.response!.data!.message,
+        timer: 3000,
+      });
+      navigate("/myday");
+      window.location.reload();
+    })
+    .catch((res)=>{
+        Swal.fire({
+          icon: "success",
+          title: "Successfully Sign In",
+          text: res!.response!.data!.message,
+          timer: 3000,
+        });
+    })
+  }
+
   return (
     <Container>
-      <Card>
+      <Card onSubmit={LoginUser}>
         <img src={pics} alt="" />
-        <h4>Sign In</h4>
-       
+        <h4>Welcome back</h4>
+
         <input
+          onChange={(e) => {
+            setEmail(e.target.value);
+          }}
+          value={email}
           type="email"
           placeholder="Enter your email"
-        />
-        <input
-          type="password"
-          placeholder="Enter your password"
         />
 
         <Div>
           Already have an account?
-          <Span>Sign in</Span>
+          <Link to="/">Sign in</Link>
         </Div>
 
         <Hold>
-          <button type="submit">Next</button>
+          <button type="submit">Sign Up</button>
         </Hold>
         {/* <Box>Please enter the required</Box> */}
       </Card>
@@ -33,7 +67,7 @@ const SignUpPage = () => {
   );
 };
 
-export default SignUpPage;
+export default SignInPage;
 const Box = styled.button`
   width: 130px;
   height: 30px;
@@ -98,8 +132,8 @@ const Card = styled.form`
 `;
 const Container = styled.div`
   width: 100%;
-  height: calc(100vh - 60px);
-  background-color: skyblue;
+  height: 100vh;
+  background-color: #bad8e4;
   display: flex;
   align-items: center;
   justify-content: center;
